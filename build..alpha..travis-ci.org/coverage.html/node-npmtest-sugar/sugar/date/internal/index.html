@@ -1,0 +1,1175 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-sugar/sugar/date/internal/</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header low">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-sugar">npmtest-sugar (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-sugar/sugar/date/internal/</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">45.4% <small>(508 / 1119)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">16.58% <small>(95 / 573)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">30.22% <small>(55 / 182)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">45.6% <small>(508 / 1114)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../../index.html">All files</a> &#187; node-npmtest-sugar/sugar/date/internal/</div>
+</div>
+<div class="body">
+<div class="coverage-summary">
+<table>
+<thead>
+<tr>
+   <th data-col="file" data-fmt="html" data-html="true" class="file">File</th>
+   <th data-col="pic" data-type="number" data-fmt="html" data-html="true" class="pic"></th>
+   <th data-col="statements" data-type="number" data-fmt="pct" class="pct">Statements</th>
+   <th data-col="statements_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="branches" data-type="number" data-fmt="pct" class="pct">Branches</th>
+   <th data-col="branches_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="functions" data-type="number" data-fmt="pct" class="pct">Functions</th>
+   <th data-col="functions_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="lines" data-type="number" data-fmt="pct" class="pct">Lines</th>
+   <th data-col="lines_raw" data-type="number" data-fmt="html" class="abs"></th>
+</tr>
+</thead>
+<tbody><tr>
+	<td class="file medium" data-value="advanceDate.js"><a href="advanceDate.js.html">advanceDate.js</a></td>
+	<td data-value="50" class="pic medium"><span class="cover-fill" style="width: 50px;"></span><span class="cover-empty" style="width:50px;"></span></td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="advanceDateWithArgs.js"><a href="advanceDateWithArgs.js.html">advanceDateWithArgs.js</a></td>
+	<td data-value="60" class="pic medium"><span class="cover-fill" style="width: 60px;"></span><span class="cover-empty" style="width:40px;"></span></td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="arrayToRegAlternates.js"><a href="arrayToRegAlternates.js.html">arrayToRegAlternates.js</a></td>
+	<td data-value="77.78" class="pic medium"><span class="cover-fill" style="width: 77px;"></span><span class="cover-empty" style="width:23px;"></span></td>
+	<td data-value="77.78" class="pct medium">77.78%</td>
+	<td data-value="9" class="abs medium">(7&nbsp;/&nbsp;9)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
+	<td data-value="77.78" class="pct medium">77.78%</td>
+	<td data-value="9" class="abs medium">(7&nbsp;/&nbsp;9)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="assertDateIsValid.js"><a href="assertDateIsValid.js.html">assertDateIsValid.js</a></td>
+	<td data-value="60" class="pic medium"><span class="cover-fill" style="width: 60px;"></span><span class="cover-empty" style="width:40px;"></span></td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="buildDateUnitMethods.js"><a href="buildDateUnitMethods.js.html">buildDateUnitMethods.js</a></td>
+	<td data-value="73.91" class="pic medium"><span class="cover-fill" style="width: 73px;"></span><span class="cover-empty" style="width:27px;"></span></td>
+	<td data-value="73.91" class="pct medium">73.91%</td>
+	<td data-value="23" class="abs medium">(17&nbsp;/&nbsp;23)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="9" class="abs low">(3&nbsp;/&nbsp;9)</td>
+	<td data-value="73.91" class="pct medium">73.91%</td>
+	<td data-value="23" class="abs medium">(17&nbsp;/&nbsp;23)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="buildNumberUnitMethods.js"><a href="buildNumberUnitMethods.js.html">buildNumberUnitMethods.js</a></td>
+	<td data-value="86.36" class="pic high"><span class="cover-fill" style="width: 86px;"></span><span class="cover-empty" style="width:14px;"></span></td>
+	<td data-value="86.36" class="pct high">86.36%</td>
+	<td data-value="22" class="abs high">(19&nbsp;/&nbsp;22)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="40" class="pct low">40%</td>
+	<td data-value="5" class="abs low">(2&nbsp;/&nbsp;5)</td>
+	<td data-value="86.36" class="pct high">86.36%</td>
+	<td data-value="22" class="abs high">(19&nbsp;/&nbsp;22)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="buildRelativeAliases.js"><a href="buildRelativeAliases.js.html">buildRelativeAliases.js</a></td>
+	<td data-value="90.91" class="pic high"><span class="cover-fill" style="width: 90px;"></span><span class="cover-empty" style="width:10px;"></span></td>
+	<td data-value="90.91" class="pct high">90.91%</td>
+	<td data-value="11" class="abs high">(10&nbsp;/&nbsp;11)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	<td data-value="90.91" class="pct high">90.91%</td>
+	<td data-value="11" class="abs high">(10&nbsp;/&nbsp;11)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="callDateSetWithWeek.js"><a href="callDateSetWithWeek.js.html">callDateSetWithWeek.js</a></td>
+	<td data-value="50" class="pic medium"><span class="cover-fill" style="width: 50px;"></span><span class="cover-empty" style="width:50px;"></span></td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="cloneDate.js"><a href="cloneDate.js.html">cloneDate.js</a></td>
+	<td data-value="50" class="pic medium"><span class="cover-fill" style="width: 50px;"></span><span class="cover-empty" style="width:50px;"></span></td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="50" class="pct medium">50%</td>
+	<td data-value="6" class="abs medium">(3&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="collectDateArguments.js"><a href="collectDateArguments.js.html">collectDateArguments.js</a></td>
+	<td data-value="30.77" class="pic low"><span class="cover-fill" style="width: 30px;"></span><span class="cover-empty" style="width:70px;"></span></td>
+	<td data-value="30.77" class="pct low">30.77%</td>
+	<td data-value="13" class="abs low">(4&nbsp;/&nbsp;13)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="10" class="abs low">(0&nbsp;/&nbsp;10)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="30.77" class="pct low">30.77%</td>
+	<td data-value="13" class="abs low">(4&nbsp;/&nbsp;13)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="collectDateParamsFromArguments.js"><a href="collectDateParamsFromArguments.js.html">collectDateParamsFromArguments.js</a></td>
+	<td data-value="40" class="pic low"><span class="cover-fill" style="width: 40px;"></span><span class="cover-empty" style="width:60px;"></span></td>
+	<td data-value="40" class="pct low">40%</td>
+	<td data-value="10" class="abs low">(4&nbsp;/&nbsp;10)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="40" class="pct low">40%</td>
+	<td data-value="10" class="abs low">(4&nbsp;/&nbsp;10)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="compareDate.js"><a href="compareDate.js.html">compareDate.js</a></td>
+	<td data-value="15" class="pic low"><span class="cover-fill" style="width: 15px;"></span><span class="cover-empty" style="width:85px;"></span></td>
+	<td data-value="15" class="pct low">15%</td>
+	<td data-value="40" class="abs low">(6&nbsp;/&nbsp;40)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="35" class="abs low">(0&nbsp;/&nbsp;35)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="3" class="abs low">(0&nbsp;/&nbsp;3)</td>
+	<td data-value="15.38" class="pct low">15.38%</td>
+	<td data-value="39" class="abs low">(6&nbsp;/&nbsp;39)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="compareDay.js"><a href="compareDay.js.html">compareDay.js</a></td>
+	<td data-value="42.86" class="pic low"><span class="cover-fill" style="width: 42px;"></span><span class="cover-empty" style="width:58px;"></span></td>
+	<td data-value="42.86" class="pct low">42.86%</td>
+	<td data-value="7" class="abs low">(3&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="5" class="abs low">(0&nbsp;/&nbsp;5)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="42.86" class="pct low">42.86%</td>
+	<td data-value="7" class="abs low">(3&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="createDate.js"><a href="createDate.js.html">createDate.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="createDateWithContext.js"><a href="createDateWithContext.js.html">createDateWithContext.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="dateFormat.js"><a href="dateFormat.js.html">dateFormat.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="3" class="abs low">(0&nbsp;/&nbsp;3)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="dateIsValid.js"><a href="dateIsValid.js.html">dateIsValid.js</a></td>
+	<td data-value="66.67" class="pic medium"><span class="cover-fill" style="width: 66px;"></span><span class="cover-empty" style="width:34px;"></span></td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="dateRelative.js"><a href="dateRelative.js.html">dateRelative.js</a></td>
+	<td data-value="16.67" class="pic low"><span class="cover-fill" style="width: 16px;"></span><span class="cover-empty" style="width:84px;"></span></td>
+	<td data-value="16.67" class="pct low">16.67%</td>
+	<td data-value="24" class="abs low">(4&nbsp;/&nbsp;24)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="12" class="abs low">(0&nbsp;/&nbsp;12)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="16.67" class="pct low">16.67%</td>
+	<td data-value="24" class="abs low">(4&nbsp;/&nbsp;24)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="defaultNewDate.js"><a href="defaultNewDate.js.html">defaultNewDate.js</a></td>
+	<td data-value="66.67" class="pic medium"><span class="cover-fill" style="width: 66px;"></span><span class="cover-empty" style="width:34px;"></span></td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="deleteDateParam.js"><a href="deleteDateParam.js.html">deleteDateParam.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="fullCompareDate.js"><a href="fullCompareDate.js.html">fullCompareDate.js</a></td>
+	<td data-value="20" class="pic low"><span class="cover-fill" style="width: 20px;"></span><span class="cover-empty" style="width:80px;"></span></td>
+	<td data-value="20" class="pct low">20%</td>
+	<td data-value="20" class="abs low">(4&nbsp;/&nbsp;20)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="17" class="abs low">(0&nbsp;/&nbsp;17)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="21.05" class="pct low">21.05%</td>
+	<td data-value="19" class="abs low">(4&nbsp;/&nbsp;19)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getAdjustedUnit.js"><a href="getAdjustedUnit.js.html">getAdjustedUnit.js</a></td>
+	<td data-value="36.36" class="pic low"><span class="cover-fill" style="width: 36px;"></span><span class="cover-empty" style="width:64px;"></span></td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getAdjustedUnitForDate.js"><a href="getAdjustedUnitForDate.js.html">getAdjustedUnitForDate.js</a></td>
+	<td data-value="33.33" class="pic low"><span class="cover-fill" style="width: 33px;"></span><span class="cover-empty" style="width:67px;"></span></td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="12" class="abs low">(4&nbsp;/&nbsp;12)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="12" class="abs low">(4&nbsp;/&nbsp;12)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getAdjustedUnitForNumber.js"><a href="getAdjustedUnitForNumber.js.html">getAdjustedUnitForNumber.js</a></td>
+	<td data-value="60" class="pic medium"><span class="cover-fill" style="width: 60px;"></span><span class="cover-empty" style="width:40px;"></span></td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getArrayWithOffset.js"><a href="getArrayWithOffset.js.html">getArrayWithOffset.js</a></td>
+	<td data-value="33.33" class="pic low"><span class="cover-fill" style="width: 33px;"></span><span class="cover-empty" style="width:67px;"></span></td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="6" class="abs low">(2&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="6" class="abs low">(2&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getDate.js"><a href="getDate.js.html">getDate.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getDateParam.js"><a href="getDateParam.js.html">getDateParam.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getDateParamKey.js"><a href="getDateParamKey.js.html">getDateParamKey.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getDateParamsFromString.js"><a href="getDateParamsFromString.js.html">getDateParamsFromString.js</a></td>
+	<td data-value="25" class="pic low"><span class="cover-fill" style="width: 25px;"></span><span class="cover-empty" style="width:75px;"></span></td>
+	<td data-value="25" class="pct low">25%</td>
+	<td data-value="12" class="abs low">(3&nbsp;/&nbsp;12)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="6" class="abs low">(0&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="25" class="pct low">25%</td>
+	<td data-value="12" class="abs low">(3&nbsp;/&nbsp;12)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getDaysInMonth.js"><a href="getDaysInMonth.js.html">getDaysInMonth.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getDaysSince.js"><a href="getDaysSince.js.html">getDaysSince.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getEnglishVariant.js"><a href="getEnglishVariant.js.html">getEnglishVariant.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="4" class="abs high">(4&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getExtendedDate.js"><a href="getExtendedDate.js.html">getExtendedDate.js</a></td>
+	<td data-value="10.42" class="pic low"><span class="cover-fill" style="width: 10px;"></span><span class="cover-empty" style="width:90px;"></span></td>
+	<td data-value="10.42" class="pct low">10.42%</td>
+	<td data-value="192" class="abs low">(20&nbsp;/&nbsp;192)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="152" class="abs low">(0&nbsp;/&nbsp;152)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="24" class="abs low">(0&nbsp;/&nbsp;24)</td>
+	<td data-value="10.47" class="pct low">10.47%</td>
+	<td data-value="191" class="abs low">(20&nbsp;/&nbsp;191)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getHigherUnitIndex.js"><a href="getHigherUnitIndex.js.html">getHigherUnitIndex.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getHours.js"><a href="getHours.js.html">getHours.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getLowerUnitIndex.js"><a href="getLowerUnitIndex.js.html">getLowerUnitIndex.js</a></td>
+	<td data-value="44.44" class="pic low"><span class="cover-fill" style="width: 44px;"></span><span class="cover-empty" style="width:56px;"></span></td>
+	<td data-value="44.44" class="pct low">44.44%</td>
+	<td data-value="9" class="abs low">(4&nbsp;/&nbsp;9)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="44.44" class="pct low">44.44%</td>
+	<td data-value="9" class="abs low">(4&nbsp;/&nbsp;9)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getMeridiemToken.js"><a href="getMeridiemToken.js.html">getMeridiemToken.js</a></td>
+	<td data-value="66.67" class="pic medium"><span class="cover-fill" style="width: 66px;"></span><span class="cover-empty" style="width:34px;"></span></td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getMonth.js"><a href="getMonth.js.html">getMonth.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getNewDate.js"><a href="getNewDate.js.html">getNewDate.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getNewLocale.js"><a href="getNewLocale.js.html">getNewLocale.js</a></td>
+	<td data-value="73.93" class="pic medium"><span class="cover-fill" style="width: 73px;"></span><span class="cover-empty" style="width:27px;"></span></td>
+	<td data-value="73.93" class="pct medium">73.93%</td>
+	<td data-value="257" class="abs medium">(190&nbsp;/&nbsp;257)</td>
+	<td data-value="57.55" class="pct medium">57.55%</td>
+	<td data-value="139" class="abs medium">(80&nbsp;/&nbsp;139)</td>
+	<td data-value="75.44" class="pct medium">75.44%</td>
+	<td data-value="57" class="abs medium">(43&nbsp;/&nbsp;57)</td>
+	<td data-value="73.93" class="pct medium">73.93%</td>
+	<td data-value="257" class="abs medium">(190&nbsp;/&nbsp;257)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getParsingTokenValue.js"><a href="getParsingTokenValue.js.html">getParsingTokenValue.js</a></td>
+	<td data-value="15.38" class="pic low"><span class="cover-fill" style="width: 15px;"></span><span class="cover-empty" style="width:85px;"></span></td>
+	<td data-value="15.38" class="pct low">15.38%</td>
+	<td data-value="13" class="abs low">(2&nbsp;/&nbsp;13)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="10" class="abs low">(0&nbsp;/&nbsp;10)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="15.38" class="pct low">15.38%</td>
+	<td data-value="13" class="abs low">(2&nbsp;/&nbsp;13)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getParsingTokenWithSuffix.js"><a href="getParsingTokenWithSuffix.js.html">getParsingTokenWithSuffix.js</a></td>
+	<td data-value="30" class="pic low"><span class="cover-fill" style="width: 30px;"></span><span class="cover-empty" style="width:70px;"></span></td>
+	<td data-value="30" class="pct low">30%</td>
+	<td data-value="10" class="abs low">(3&nbsp;/&nbsp;10)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="30" class="pct low">30%</td>
+	<td data-value="10" class="abs low">(3&nbsp;/&nbsp;10)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getRegNonCapturing.js"><a href="getRegNonCapturing.js.html">getRegNonCapturing.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="7" class="abs high">(7&nbsp;/&nbsp;7)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="7" class="abs high">(7&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getTimeDistanceForUnit.js"><a href="getTimeDistanceForUnit.js.html">getTimeDistanceForUnit.js</a></td>
+	<td data-value="14.29" class="pic low"><span class="cover-fill" style="width: 14px;"></span><span class="cover-empty" style="width:86px;"></span></td>
+	<td data-value="14.29" class="pct low">14.29%</td>
+	<td data-value="21" class="abs low">(3&nbsp;/&nbsp;21)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="12" class="abs low">(0&nbsp;/&nbsp;12)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="14.29" class="pct low">14.29%</td>
+	<td data-value="21" class="abs low">(3&nbsp;/&nbsp;21)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getUTCOffset.js"><a href="getUTCOffset.js.html">getUTCOffset.js</a></td>
+	<td data-value="36.36" class="pic low"><span class="cover-fill" style="width: 36px;"></span><span class="cover-empty" style="width:64px;"></span></td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="8" class="abs low">(0&nbsp;/&nbsp;8)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="40" class="pct low">40%</td>
+	<td data-value="10" class="abs low">(4&nbsp;/&nbsp;10)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getUnitIndexForParamName.js"><a href="getUnitIndexForParamName.js.html">getUnitIndexForParamName.js</a></td>
+	<td data-value="33.33" class="pic low"><span class="cover-fill" style="width: 33px;"></span><span class="cover-empty" style="width:67px;"></span></td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="9" class="abs low">(3&nbsp;/&nbsp;9)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="33.33" class="pct low">33.33%</td>
+	<td data-value="9" class="abs low">(3&nbsp;/&nbsp;9)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getWeekNumber.js"><a href="getWeekNumber.js.html">getWeekNumber.js</a></td>
+	<td data-value="22.22" class="pic low"><span class="cover-fill" style="width: 22px;"></span><span class="cover-empty" style="width:78px;"></span></td>
+	<td data-value="22.22" class="pct low">22.22%</td>
+	<td data-value="18" class="abs low">(4&nbsp;/&nbsp;18)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="8" class="abs low">(0&nbsp;/&nbsp;8)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="22.22" class="pct low">22.22%</td>
+	<td data-value="18" class="abs low">(4&nbsp;/&nbsp;18)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getWeekYear.js"><a href="getWeekYear.js.html">getWeekYear.js</a></td>
+	<td data-value="22.22" class="pic low"><span class="cover-fill" style="width: 22px;"></span><span class="cover-empty" style="width:78px;"></span></td>
+	<td data-value="22.22" class="pct low">22.22%</td>
+	<td data-value="18" class="abs low">(4&nbsp;/&nbsp;18)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="14" class="abs low">(0&nbsp;/&nbsp;14)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="22.22" class="pct low">22.22%</td>
+	<td data-value="18" class="abs low">(4&nbsp;/&nbsp;18)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getWeekday.js"><a href="getWeekday.js.html">getWeekday.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getYear.js"><a href="getYear.js.html">getYear.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="getYearFromAbbreviation.js"><a href="getYearFromAbbreviation.js.html">getYearFromAbbreviation.js</a></td>
+	<td data-value="36.36" class="pic low"><span class="cover-fill" style="width: 36px;"></span><span class="cover-empty" style="width:64px;"></span></td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="6" class="abs low">(0&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="isUTC.js"><a href="isUTC.js.html">isUTC.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="iterateOverDateParams.js"><a href="iterateOverDateParams.js.html">iterateOverDateParams.js</a></td>
+	<td data-value="38.46" class="pic low"><span class="cover-fill" style="width: 38px;"></span><span class="cover-empty" style="width:62px;"></span></td>
+	<td data-value="38.46" class="pct low">38.46%</td>
+	<td data-value="13" class="abs low">(5&nbsp;/&nbsp;13)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="6" class="abs low">(0&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="3" class="abs low">(0&nbsp;/&nbsp;3)</td>
+	<td data-value="38.46" class="pct low">38.46%</td>
+	<td data-value="13" class="abs low">(5&nbsp;/&nbsp;13)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="iterateOverDateUnits.js"><a href="iterateOverDateUnits.js.html">iterateOverDateUnits.js</a></td>
+	<td data-value="90" class="pic high"><span class="cover-fill" style="width: 90px;"></span><span class="cover-empty" style="width:10px;"></span></td>
+	<td data-value="90" class="pct high">90%</td>
+	<td data-value="10" class="abs high">(9&nbsp;/&nbsp;10)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
+	<td data-value="90" class="pct high">90%</td>
+	<td data-value="10" class="abs high">(9&nbsp;/&nbsp;10)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="iterateOverHigherDateParams.js"><a href="iterateOverHigherDateParams.js.html">iterateOverHigherDateParams.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="moveToBeginningOfUnit.js"><a href="moveToBeginningOfUnit.js.html">moveToBeginningOfUnit.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="moveToBeginningOfWeek.js"><a href="moveToBeginningOfWeek.js.html">moveToBeginningOfWeek.js</a></td>
+	<td data-value="66.67" class="pic medium"><span class="cover-fill" style="width: 66px;"></span><span class="cover-empty" style="width:34px;"></span></td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="6" class="abs medium">(4&nbsp;/&nbsp;6)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="moveToEndOfUnit.js"><a href="moveToEndOfUnit.js.html">moveToEndOfUnit.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="moveToEndOfWeek.js"><a href="moveToEndOfWeek.js.html">moveToEndOfWeek.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="moveToFirstDayOfWeekYear.js"><a href="moveToFirstDayOfWeekYear.js.html">moveToFirstDayOfWeekYear.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="resetLowerUnits.js"><a href="resetLowerUnits.js.html">resetLowerUnits.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="resetTime.js"><a href="resetTime.js.html">resetTime.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="setDate.js"><a href="setDate.js.html">setDate.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="setDateChainableConstructor.js"><a href="setDateChainableConstructor.js.html">setDateChainableConstructor.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="5" class="abs high">(5&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="1" class="abs high">(1&nbsp;/&nbsp;1)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="5" class="abs high">(5&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="setISOWeekNumber.js"><a href="setISOWeekNumber.js.html">setISOWeekNumber.js</a></td>
+	<td data-value="30.77" class="pic low"><span class="cover-fill" style="width: 30px;"></span><span class="cover-empty" style="width:70px;"></span></td>
+	<td data-value="30.77" class="pct low">30.77%</td>
+	<td data-value="13" class="abs low">(4&nbsp;/&nbsp;13)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="30.77" class="pct low">30.77%</td>
+	<td data-value="13" class="abs low">(4&nbsp;/&nbsp;13)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="setMonth.js"><a href="setMonth.js.html">setMonth.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="setUnitAndLowerToEdge.js"><a href="setUnitAndLowerToEdge.js.html">setUnitAndLowerToEdge.js</a></td>
+	<td data-value="36.36" class="pic low"><span class="cover-fill" style="width: 36px;"></span><span class="cover-empty" style="width:64px;"></span></td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="6" class="abs low">(0&nbsp;/&nbsp;6)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="setWeekday.js"><a href="setWeekday.js.html">setWeekday.js</a></td>
+	<td data-value="28.57" class="pic low"><span class="cover-fill" style="width: 28px;"></span><span class="cover-empty" style="width:72px;"></span></td>
+	<td data-value="28.57" class="pct low">28.57%</td>
+	<td data-value="14" class="abs low">(4&nbsp;/&nbsp;14)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="10" class="abs low">(0&nbsp;/&nbsp;10)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="30.77" class="pct low">30.77%</td>
+	<td data-value="13" class="abs low">(4&nbsp;/&nbsp;13)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="setYear.js"><a href="setYear.js.html">setYear.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="tzOffset.js"><a href="tzOffset.js.html">tzOffset.js</a></td>
+	<td data-value="66.67" class="pic medium"><span class="cover-fill" style="width: 66px;"></span><span class="cover-empty" style="width:34px;"></span></td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="66.67" class="pct medium">66.67%</td>
+	<td data-value="3" class="abs medium">(2&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="updateDate.js"><a href="updateDate.js.html">updateDate.js</a></td>
+	<td data-value="16.18" class="pic low"><span class="cover-fill" style="width: 16px;"></span><span class="cover-empty" style="width:84px;"></span></td>
+	<td data-value="16.18" class="pct low">16.18%</td>
+	<td data-value="68" class="abs low">(11&nbsp;/&nbsp;68)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="50" class="abs low">(0&nbsp;/&nbsp;50)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="8" class="abs low">(0&nbsp;/&nbsp;8)</td>
+	<td data-value="16.18" class="pct low">16.18%</td>
+	<td data-value="68" class="abs low">(11&nbsp;/&nbsp;68)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="walkUnitDown.js"><a href="walkUnitDown.js.html">walkUnitDown.js</a></td>
+	<td data-value="42.86" class="pic low"><span class="cover-fill" style="width: 42px;"></span><span class="cover-empty" style="width:58px;"></span></td>
+	<td data-value="42.86" class="pct low">42.86%</td>
+	<td data-value="7" class="abs low">(3&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="42.86" class="pct low">42.86%</td>
+	<td data-value="7" class="abs low">(3&nbsp;/&nbsp;7)</td>
+	</tr>
+
+</tbody>
+</table>
+</div></div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 15 2017 20:06:31 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,1656 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <title>Code coverage report for node-npmtest-sugar/sugar/date/</title>
+    <meta charset="utf-8">
+    <style>
+        body, html {
+            margin:0; padding: 0;
+        }
+        body {
+            font-family: Arial, Helvetica;
+            font-size: 10pt;
+        }
+        div.header, div.footer {
+            background: #eee;
+            padding: 1em;
+        }
+        div.header {
+            height: 160px;
+            padding: 0 1em 0 1em;
+            z-index: 100;
+            position: fixed;
+            top: 0;
+            border-bottom: 1px solid #666;
+            width: 100%;
+        }
+        div.footer {
+            border-top: 1px solid #666;
+        }
+        div.body {
+            margin-top: 170px;
+        }
+        div.meta {
+            font-size: 90%;
+            text-align: center;
+        }
+        h1, h2, h3 {
+            font-weight: normal;
+        }
+        h1 {
+            font-size: 12pt;
+        }
+        h2 {
+            font-size: 10pt;
+        }
+        pre {
+            font-family: Menlo, Monaco, Consolas, Courier New, monospace;
+            margin: 0;
+            padding: 0;
+            font-size: 14px;
+            tab-size: 2;
+        }
+
+        div.path { font-size: 110%; }
+        div.path a:link, div.path a:visited { color: #000; }
+        table.coverage { border-collapse: collapse; margin:0; padding: 0 }
+
+        table.coverage td {
+            margin: 0;
+            padding: 0;
+            color: #111;
+            vertical-align: top;
+        }
+        table.coverage td.line-count {
+            width: 50px;
+            text-align: right;
+            padding-right: 5px;
+        }
+        table.coverage td.line-coverage {
+            color: #777 !important;
+            text-align: right;
+            border-left: 1px solid #666;
+            border-right: 1px solid #666;
+        }
+
+        table.coverage td.text {
+        }
+
+        table.coverage td span.cline-any {
+            display: inline-block;
+            padding: 0 5px;
+            width: 40px;
+        }
+        table.coverage td span.cline-neutral {
+            background: #eee;
+        }
+        table.coverage td span.cline-yes {
+            background: #b5d592;
+            color: #999;
+        }
+        table.coverage td span.cline-no {
+            background: #fc8c84;
+        }
+
+        .cstat-yes { color: #111; }
+        .cstat-no { background: #fc8c84; color: #111; }
+        .fstat-no { background: #ffc520; color: #111 !important; }
+        .cbranch-no { background:  yellow !important; color: #111; }
+
+        .cstat-skip { background: #ddd; color: #111; }
+        .fstat-skip { background: #ddd; color: #111 !important; }
+        .cbranch-skip { background: #ddd !important; color: #111; }
+
+        .missing-if-branch {
+            display: inline-block;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: black;
+            color: yellow;
+        }
+
+        .skip-if-branch {
+            display: none;
+            margin-right: 10px;
+            position: relative;
+            padding: 0 4px;
+            background: #ccc;
+            color: white;
+        }
+
+        .missing-if-branch .typ, .skip-if-branch .typ {
+            color: inherit !important;
+        }
+
+        .entity, .metric { font-weight: bold; }
+        .metric { display: inline-block; border: 1px solid #333; padding: 0.3em; background: white; }
+        .metric small { font-size: 80%; font-weight: normal; color: #666; }
+
+        div.coverage-summary table { border-collapse: collapse; margin: 3em; font-size: 110%; }
+        div.coverage-summary td, div.coverage-summary table  th { margin: 0; padding: 0.25em 1em; border-top: 1px solid #666; border-bottom: 1px solid #666; }
+        div.coverage-summary th { text-align: left; border: 1px solid #666; background: #eee; font-weight: normal; }
+        div.coverage-summary th.file { border-right: none !important; }
+        div.coverage-summary th.pic { border-left: none !important; text-align: right; }
+        div.coverage-summary th.pct { border-right: none !important; }
+        div.coverage-summary th.abs { border-left: none !important; text-align: right; }
+        div.coverage-summary td.pct { text-align: right; border-left: 1px solid #666; }
+        div.coverage-summary td.abs { text-align: right; font-size: 90%; color: #444; border-right: 1px solid #666; }
+        div.coverage-summary td.file { text-align: right; border-left: 1px solid #666; white-space: nowrap;  }
+        div.coverage-summary td.pic { min-width: 120px !important;  }
+        div.coverage-summary a:link { color: #000; }
+        div.coverage-summary a:visited { color: #333; }
+        div.coverage-summary tfoot td { border-top: 1px solid #666; }
+
+        div.coverage-summary .yui3-datatable-sort-indicator, div.coverage-summary .dummy-sort-indicator {
+            height: 10px;
+            width: 7px;
+            display: inline-block;
+            margin-left: 0.5em;
+        }
+        div.coverage-summary .yui3-datatable-sort-indicator {
+            background: no-repeat scroll 0 0 transparent;
+        }
+        div.coverage-summary .yui3-datatable-sorted .yui3-datatable-sort-indicator {
+            background-position: 0 -20px;
+        }
+        div.coverage-summary .yui3-datatable-sorted-desc .yui3-datatable-sort-indicator {
+            background-position: 0 -10px;
+        }
+
+        .high { background: #b5d592 !important; }
+        .medium { background: #ffe87c !important; }
+        .low { background: #fc8c84 !important; }
+
+        span.cover-fill, span.cover-empty {
+            display:inline-block;
+            border:1px solid #444;
+            background: white;
+            height: 12px;
+        }
+        span.cover-fill {
+            background: #ccc;
+            border-right: 1px solid #444;
+        }
+        span.cover-empty {
+            background: white;
+            border-left: none;
+        }
+        span.cover-full {
+            border-right: none !important;
+        }
+        pre.prettyprint {
+            border: none !important;
+            padding: 0 !important;
+            margin: 0 !important;
+        }
+        .com { color: #999 !important; }
+        .ignore-none { color: #999; font-weight: normal; }
+
+    </style>
+</head>
+<body>
+<div class="header high">
+    <h1 style="font-weight: bold;">
+        <a href="https://github.com/npmtest/node-npmtest-sugar">npmtest-sugar (v0.0.1)</a>
+    </h1>
+    <h1>Code coverage report for <span class="entity">node-npmtest-sugar/sugar/date/</span></h1>
+    <h2>
+        
+        Statements: <span class="metric">90.92% <small>(521 / 573)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Branches: <span class="metric">0% <small>(0 / 19)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Functions: <span class="metric">0% <small>(0 / 34)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        
+        Lines: <span class="metric">90.92% <small>(521 / 573)</small></span> &nbsp;&nbsp;&nbsp;&nbsp;
+        
+        Ignored: <span class="metric"><span class="ignore-none">none</span></span> &nbsp;&nbsp;&nbsp;&nbsp;
+    </h2>
+    <div class="path"><a href="../../../index.html">All files</a> &#187; node-npmtest-sugar/sugar/date/</div>
+</div>
+<div class="body">
+<div class="coverage-summary">
+<table>
+<thead>
+<tr>
+   <th data-col="file" data-fmt="html" data-html="true" class="file">File</th>
+   <th data-col="pic" data-type="number" data-fmt="html" data-html="true" class="pic"></th>
+   <th data-col="statements" data-type="number" data-fmt="pct" class="pct">Statements</th>
+   <th data-col="statements_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="branches" data-type="number" data-fmt="pct" class="pct">Branches</th>
+   <th data-col="branches_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="functions" data-type="number" data-fmt="pct" class="pct">Functions</th>
+   <th data-col="functions_raw" data-type="number" data-fmt="html" class="abs"></th>
+   <th data-col="lines" data-type="number" data-fmt="pct" class="pct">Lines</th>
+   <th data-col="lines_raw" data-type="number" data-fmt="html" class="abs"></th>
+</tr>
+</thead>
+<tbody><tr>
+	<td class="file high" data-value="addDays.js"><a href="addDays.js.html">addDays.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addHours.js"><a href="addHours.js.html">addHours.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addLocale.js"><a href="addLocale.js.html">addLocale.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addMilliseconds.js"><a href="addMilliseconds.js.html">addMilliseconds.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addMinutes.js"><a href="addMinutes.js.html">addMinutes.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addMonths.js"><a href="addMonths.js.html">addMonths.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addSeconds.js"><a href="addSeconds.js.html">addSeconds.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addWeeks.js"><a href="addWeeks.js.html">addWeeks.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="addYears.js"><a href="addYears.js.html">addYears.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="advance.js"><a href="advance.js.html">advance.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="beginningOfDay.js"><a href="beginningOfDay.js.html">beginningOfDay.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="beginningOfISOWeek.js"><a href="beginningOfISOWeek.js.html">beginningOfISOWeek.js</a></td>
+	<td data-value="30" class="pic low"><span class="cover-fill" style="width: 30px;"></span><span class="cover-empty" style="width:70px;"></span></td>
+	<td data-value="30" class="pct low">30%</td>
+	<td data-value="10" class="abs low">(3&nbsp;/&nbsp;10)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="30" class="pct low">30%</td>
+	<td data-value="10" class="abs low">(3&nbsp;/&nbsp;10)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="beginningOfMonth.js"><a href="beginningOfMonth.js.html">beginningOfMonth.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="beginningOfWeek.js"><a href="beginningOfWeek.js.html">beginningOfWeek.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="beginningOfYear.js"><a href="beginningOfYear.js.html">beginningOfYear.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="clone.js"><a href="clone.js.html">clone.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="create.js"><a href="create.js.html">create.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="daysAgo.js"><a href="daysAgo.js.html">daysAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="daysFromNow.js"><a href="daysFromNow.js.html">daysFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="daysInMonth.js"><a href="daysInMonth.js.html">daysInMonth.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="daysSince.js"><a href="daysSince.js.html">daysSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="daysUntil.js"><a href="daysUntil.js.html">daysUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="endOfDay.js"><a href="endOfDay.js.html">endOfDay.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="endOfISOWeek.js"><a href="endOfISOWeek.js.html">endOfISOWeek.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="endOfMonth.js"><a href="endOfMonth.js.html">endOfMonth.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="endOfWeek.js"><a href="endOfWeek.js.html">endOfWeek.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="endOfYear.js"><a href="endOfYear.js.html">endOfYear.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="format.js"><a href="format.js.html">format.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="get.js"><a href="get.js.html">get.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getAllLocaleCodes.js"><a href="getAllLocaleCodes.js.html">getAllLocaleCodes.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getAllLocales.js"><a href="getAllLocales.js.html">getAllLocales.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getISOWeek.js"><a href="getISOWeek.js.html">getISOWeek.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getLocale.js"><a href="getLocale.js.html">getLocale.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="getOption.js"><a href="getOption.js.html">getOption.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getUTCOffset.js"><a href="getUTCOffset.js.html">getUTCOffset.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getUTCWeekday.js"><a href="getUTCWeekday.js.html">getUTCWeekday.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="getWeekday.js"><a href="getWeekday.js.html">getWeekday.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="hoursAgo.js"><a href="hoursAgo.js.html">hoursAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="hoursFromNow.js"><a href="hoursFromNow.js.html">hoursFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="hoursSince.js"><a href="hoursSince.js.html">hoursSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="hoursUntil.js"><a href="hoursUntil.js.html">hoursUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="index.js"><a href="index.js.html">index.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="189" class="abs high">(189&nbsp;/&nbsp;189)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="189" class="abs high">(189&nbsp;/&nbsp;189)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="is.js"><a href="is.js.html">is.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="isAfter.js"><a href="isAfter.js.html">isAfter.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="isBefore.js"><a href="isBefore.js.html">isBefore.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file low" data-value="isBetween.js"><a href="isBetween.js.html">isBetween.js</a></td>
+	<td data-value="36.36" class="pic low"><span class="cover-fill" style="width: 36px;"></span><span class="cover-empty" style="width:64px;"></span></td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="4" class="abs low">(0&nbsp;/&nbsp;4)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="36.36" class="pct low">36.36%</td>
+	<td data-value="11" class="abs low">(4&nbsp;/&nbsp;11)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isFriday.js"><a href="isFriday.js.html">isFriday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isFuture.js"><a href="isFuture.js.html">isFuture.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isLastMonth.js"><a href="isLastMonth.js.html">isLastMonth.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isLastWeek.js"><a href="isLastWeek.js.html">isLastWeek.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isLastYear.js"><a href="isLastYear.js.html">isLastYear.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="isLeapYear.js"><a href="isLeapYear.js.html">isLeapYear.js</a></td>
+	<td data-value="60" class="pic medium"><span class="cover-fill" style="width: 60px;"></span><span class="cover-empty" style="width:40px;"></span></td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="3" class="abs low">(0&nbsp;/&nbsp;3)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isMonday.js"><a href="isMonday.js.html">isMonday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isNextMonth.js"><a href="isNextMonth.js.html">isNextMonth.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isNextWeek.js"><a href="isNextWeek.js.html">isNextWeek.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isNextYear.js"><a href="isNextYear.js.html">isNextYear.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isPast.js"><a href="isPast.js.html">isPast.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isSaturday.js"><a href="isSaturday.js.html">isSaturday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isSunday.js"><a href="isSunday.js.html">isSunday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isThisMonth.js"><a href="isThisMonth.js.html">isThisMonth.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isThisWeek.js"><a href="isThisWeek.js.html">isThisWeek.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isThisYear.js"><a href="isThisYear.js.html">isThisYear.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isThursday.js"><a href="isThursday.js.html">isThursday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isToday.js"><a href="isToday.js.html">isToday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isTomorrow.js"><a href="isTomorrow.js.html">isTomorrow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isTuesday.js"><a href="isTuesday.js.html">isTuesday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="isUTC.js"><a href="isUTC.js.html">isUTC.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="isValid.js"><a href="isValid.js.html">isValid.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isWednesday.js"><a href="isWednesday.js.html">isWednesday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isWeekday.js"><a href="isWeekday.js.html">isWeekday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isWeekend.js"><a href="isWeekend.js.html">isWeekend.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="isYesterday.js"><a href="isYesterday.js.html">isYesterday.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="iso.js"><a href="iso.js.html">iso.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="millisecondsAgo.js"><a href="millisecondsAgo.js.html">millisecondsAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="millisecondsFromNow.js"><a href="millisecondsFromNow.js.html">millisecondsFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="millisecondsSince.js"><a href="millisecondsSince.js.html">millisecondsSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="millisecondsUntil.js"><a href="millisecondsUntil.js.html">millisecondsUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="minutesAgo.js"><a href="minutesAgo.js.html">minutesAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="minutesFromNow.js"><a href="minutesFromNow.js.html">minutesFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="minutesSince.js"><a href="minutesSince.js.html">minutesSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="minutesUntil.js"><a href="minutesUntil.js.html">minutesUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="monthsAgo.js"><a href="monthsAgo.js.html">monthsAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="monthsFromNow.js"><a href="monthsFromNow.js.html">monthsFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="monthsSince.js"><a href="monthsSince.js.html">monthsSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="monthsUntil.js"><a href="monthsUntil.js.html">monthsUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="range.js"><a href="range.js.html">range.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="relative.js"><a href="relative.js.html">relative.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="relativeTo.js"><a href="relativeTo.js.html">relativeTo.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="removeLocale.js"><a href="removeLocale.js.html">removeLocale.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="reset.js"><a href="reset.js.html">reset.js</a></td>
+	<td data-value="57.14" class="pic medium"><span class="cover-fill" style="width: 57px;"></span><span class="cover-empty" style="width:43px;"></span></td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="2" class="abs low">(0&nbsp;/&nbsp;2)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="57.14" class="pct medium">57.14%</td>
+	<td data-value="7" class="abs medium">(4&nbsp;/&nbsp;7)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="rewind.js"><a href="rewind.js.html">rewind.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="secondsAgo.js"><a href="secondsAgo.js.html">secondsAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="secondsFromNow.js"><a href="secondsFromNow.js.html">secondsFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="secondsSince.js"><a href="secondsSince.js.html">secondsSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="secondsUntil.js"><a href="secondsUntil.js.html">secondsUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="set.js"><a href="set.js.html">set.js</a></td>
+	<td data-value="60" class="pic medium"><span class="cover-fill" style="width: 60px;"></span><span class="cover-empty" style="width:40px;"></span></td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="60" class="pct medium">60%</td>
+	<td data-value="5" class="abs medium">(3&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="setISOWeek.js"><a href="setISOWeek.js.html">setISOWeek.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="setLocale.js"><a href="setLocale.js.html">setLocale.js</a></td>
+	<td data-value="80" class="pic high"><span class="cover-fill" style="width: 80px;"></span><span class="cover-empty" style="width:20px;"></span></td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="80" class="pct high">80%</td>
+	<td data-value="5" class="abs high">(4&nbsp;/&nbsp;5)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="setOption.js"><a href="setOption.js.html">setOption.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="2" class="abs high">(2&nbsp;/&nbsp;2)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="setUTC.js"><a href="setUTC.js.html">setUTC.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file medium" data-value="setWeekday.js"><a href="setWeekday.js.html">setWeekday.js</a></td>
+	<td data-value="75" class="pic medium"><span class="cover-fill" style="width: 75px;"></span><span class="cover-empty" style="width:25px;"></span></td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="0" class="pct low">0%</td>
+	<td data-value="1" class="abs low">(0&nbsp;/&nbsp;1)</td>
+	<td data-value="75" class="pct medium">75%</td>
+	<td data-value="4" class="abs medium">(3&nbsp;/&nbsp;4)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="weeksAgo.js"><a href="weeksAgo.js.html">weeksAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="weeksFromNow.js"><a href="weeksFromNow.js.html">weeksFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="weeksSince.js"><a href="weeksSince.js.html">weeksSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="weeksUntil.js"><a href="weeksUntil.js.html">weeksUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="yearsAgo.js"><a href="yearsAgo.js.html">yearsAgo.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="yearsFromNow.js"><a href="yearsFromNow.js.html">yearsFromNow.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="yearsSince.js"><a href="yearsSince.js.html">yearsSince.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+<tr>
+	<td class="file high" data-value="yearsUntil.js"><a href="yearsUntil.js.html">yearsUntil.js</a></td>
+	<td data-value="100" class="pic high"><span class="cover-fill cover-full" style="width: 100px;"></span><span class="cover-empty" style="width:0px;"></span></td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="0" class="abs high">(0&nbsp;/&nbsp;0)</td>
+	<td data-value="100" class="pct high">100%</td>
+	<td data-value="3" class="abs high">(3&nbsp;/&nbsp;3)</td>
+	</tr>
+
+</tbody>
+</table>
+</div></div>
+<div class="footer">
+    <div class="meta">Generated by <a href="https://github.com/kaizhu256/node-utility2" target="_blank">utility2</a> at Sat Apr 15 2017 20:06:31 GMT+0000 (UTC)</div>
+</div>
+</body>
+</html>
