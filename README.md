@@ -1,6 +1,6 @@
 # npmtest-sugar
 
-#### test coverage for  [sugar (v2.0.4)](https://sugarjs.com/)  [![npm package](https://img.shields.io/npm/v/npmtest-sugar.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-sugar) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-sugar.svg)](https://travis-ci.org/npmtest/node-npmtest-sugar)
+#### basic test coverage for  [sugar (v2.0.4)](https://sugarjs.com/)  [![npm package](https://img.shields.io/npm/v/npmtest-sugar.svg?style=flat-square)](https://www.npmjs.org/package/npmtest-sugar) [![travis-ci.org build-status](https://api.travis-ci.org/npmtest/node-npmtest-sugar.svg)](https://travis-ci.org/npmtest/node-npmtest-sugar)
 
 #### A Javascript utility library for working with native objects.
 
@@ -10,7 +10,7 @@
 |--:|:--|
 | coverage : | [![istanbul-coverage](https://npmtest.github.io/node-npmtest-sugar/build/coverage.badge.svg)](https://npmtest.github.io/node-npmtest-sugar/build/coverage.html/index.html)|
 | test-report : | [![test-report](https://npmtest.github.io/node-npmtest-sugar/build/test-report.badge.svg)](https://npmtest.github.io/node-npmtest-sugar/build/test-report.html)|
-| build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-sugar/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-sugar/tree/gh-pages/build)|
+| test-server-github : | [![github.com test-server](https://npmtest.github.io/node-npmtest-sugar/GitHub-Mark-32px.png)](https://npmtest.github.io/node-npmtest-sugar/build/app/index.html) | | build-artifacts : | [![build-artifacts](https://npmtest.github.io/node-npmtest-sugar/glyphicons_144_folder_open.png)](https://github.com/npmtest/node-npmtest-sugar/tree/gh-pages/build)|
 
 - [https://npmtest.github.io/node-npmtest-sugar/build/coverage.html/index.html](https://npmtest.github.io/node-npmtest-sugar/build/coverage.html/index.html)
 
@@ -86,7 +86,8 @@
     },
     "scripts": {},
     "typings": "sugar.d.ts",
-    "version": "2.0.4"
+    "version": "2.0.4",
+    "bin": {}
 }
 ```
 
